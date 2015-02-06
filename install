@@ -1,0 +1,15 @@
+#!/bin/bash
+
+# backup current dotfiles
+stamp=$(date +%Y%m%d%H%M%S)
+
+mv ~/.bashrc ~/.bashrc.$stamp
+mv ~/.vimrc ~/.vimrc.$stamp
+mv ~/.vim ~/.vim.$stamp
+
+cp .bashrc ~/.bashrc
+cp .vimrc ~/.vimrc
+cp -r .vim ~/.vim
+
+# install plugins within .vimrc
+vim +PluginInstall +qall
