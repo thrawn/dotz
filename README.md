@@ -1,2 +1,2 @@
 # dotz
-dot files
+some choice dots
