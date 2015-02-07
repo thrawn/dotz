@@ -2,14 +2,15 @@
 
 # backup current dotfiles
 stamp=$(date +%Y%m%d%H%M%S)
+rsync -a ../dotz /etc/
 
 mv ~/.bashrc ~/.bashrc.$stamp
 mv ~/.vimrc ~/.vimrc.$stamp
 mv ~/.vim ~/.vim.$stamp
 
-cp .bashrc ~/.bashrc
-cp .vimrc ~/.vimrc
-cp -r .vim ~/.vim
+ln -s /etc/dotz/.bashrc ~/.bashrc
+ln -s /etc/dotz/.vimrc ~/.vimrc
+ln -s /etc/dotz/.vim ~/.vim
 
 # install plugins within .vimrc
 vim +PluginInstall +qall
