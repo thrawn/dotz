@@ -17,7 +17,9 @@ fi
 cd ~/dotz
 
 for file in $files; do
-    mv ~/.$file ~/dotz_old/.$file.$stamp
+    if [ -e $file ]; then
+        mv ~/.$file ~/dotz_old/.$file.$stamp
+    fi
     ln -s ~/dotz/.$file ~/.$file
 done
 
