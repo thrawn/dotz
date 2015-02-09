@@ -22,6 +22,9 @@ for file in $files; do
 done
 
 # vundle install
+if [ -d ~/.vim/bundle/Vundle.vim ]; then
+    mv ~/.vim/bundle/Vundle.vim /tmp/Vundle.vim.$stamp
+fi
 git clone https://github.com/gmarik/Vundle.vim.git ~/.vim/bundle/Vundle.vim
 # install plugins within .vimrc
 vim +PluginInstall +qall
