@@ -10,21 +10,30 @@ files="bashrc vimrc vim"    # list of files/folders to symlink in homedir
 
 ##########
 
-if [ ! -d ~/dotz_old ]; then
-    mkdir -p ~/dotz_old
+if [ ! -e ~/dotz_old ]; then
+    mkdir ~/dotz_old
 fi
 
+# git cloned previously
 cd ~/dotz
 
 for file in $files; do
-    if [ -e $file ]; then
+    if [ -e ~/.$file ] && [ ! -L ~/.$file ]; then
         mv ~/.$file ~/dotz_old/.$file.$stamp
+    else
+        mv ~/.$file /tmp/.$file.$stamp
     fi
-    ln -s ~/dotz/.$file ~/.$file
+
+    if [ -e ~/.$file ] && [ -L ~/.$file ]; then
+        rm ~/.$file
+        ln -s ~/dotz/.$file ~/.$file
+    else
+        ln -s ~/dotz/.$file ~/.$file
+    fi
 done
 
 # vundle install
-if [ -d ~/.vim/bundle/Vundle.vim ]; then
+if [ -e ~/.vim/bundle/Vundle.vim ]; then
     mv ~/.vim/bundle/Vundle.vim /tmp/Vundle.vim.$stamp
 fi
 git clone https://github.com/gmarik/Vundle.vim.git ~/.vim/bundle/Vundle.vim
