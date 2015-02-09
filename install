@@ -6,31 +6,21 @@
 ########## Variables
 
 stamp=$(date +%Y%m%d%H%M%S)
-dir=~/dotz                    # dotfiles directory
-olddir=~/dotz_old             # old dotfiles backup directory
 files="bashrc vimrc vim"    # list of files/folders to symlink in homedir
 
 ##########
 
-# create dotfiles_old in homedir
-echo -n "Creating $olddir for backup of any existing dotfiles in ~ ..."
-mkdir -p $olddir
-echo "done"
+if [ ! -d ~/dotz_old ]; then
+    mkdir -p ~/dotz_old
+fi
 
-# change to the dotfiles directory
-echo -n "Changing to the $dir directory ..."
-cd $dir
-echo "done"
+cd ~/dotz
 
-# move any existing dotfiles in homedir to dotfiles_old directory, then create symlinks from the homedir to any files in the ~/dotfiles directory specified in $files
 for file in $files; do
-    echo "Moving any existing dotfiles from ~ to $olddir"
-    mv ~/.$file $olddir/.$file.$stamp
-    echo "Creating symlink to $file in home directory."
-    ln -s $dir/.$file ~/.$file
+    mv ~/.$file ~/dotz_old/.$file.$stamp
+    ln -s ~/dotz/.$file ~/.$file
 done
 
-mkdir -p $dir/.vim/bundle
 # vundle install
 git clone https://github.com/gmarik/Vundle.vim.git ~/.vim/bundle/Vundle.vim
 # install plugins within .vimrc
