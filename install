@@ -16,12 +16,13 @@ fi
 
 # git cloned previously
 cd ~/dotz
+if [ ! -e ~/dotz/.vim ]; then
+    mkdir -p ~/dotz/.vim/bundle
+fi
 
 for file in $files; do
     if [ -e ~/.$file ] && [ ! -L ~/.$file ]; then
         mv ~/.$file ~/dotz_old/.$file.$stamp
-    else
-        mv ~/.$file /tmp/.$file.$stamp
     fi
 
     if [ -e ~/.$file ] && [ -L ~/.$file ]; then
