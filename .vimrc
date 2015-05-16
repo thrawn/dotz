@@ -69,7 +69,9 @@ filetype plugin indent on
 set tabstop=4
 set softtabstop=4
 set shiftwidth=4
-set textwidth=80
+set textwidth=0
+set wrapmargin=0
+set wrap
 set smarttab
 set expandtab
 set smartindent
@@ -115,7 +117,7 @@ set timeoutlen=500
 set hlsearch
 
 " Makes search act like search in modern browsers
-set incsearch
+" set incsearch
 
 " For regular expressions turn magic on
 set magic
